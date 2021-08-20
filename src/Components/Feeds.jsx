@@ -11,14 +11,7 @@ const Feeds = (props) => {
   const [posts, setPosts] = useState([]);
   const [uploadVideoError, setUploadVideoError] = useState("");
   const { currentUser } = useContext(AuthContext);
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      props.history.push("/login");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   const handleInputFile = (e) => {
     let file = e.target.files[0];
     setVideoFile(file);
@@ -115,7 +108,6 @@ const Feeds = (props) => {
 
   return (
     <div>
-      <button onClick={handleLogout}>Logout</button>
       <div className="uploadVideo">
         <div>
           <input type="file" onChange={handleInputFile} />
