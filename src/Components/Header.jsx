@@ -7,10 +7,19 @@ import logo from "../logo.png";
 
 
 
-const Header =  () => {
+const Header =  (props) => {
     const {currentUser}=useContext(AuthContext);
+    const { signOut } = useContext(AuthContext);
     
-    
+    const handleLogout = async () => {
+      try {
+        await signOut();
+        props.history.push("/login");
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     const useStyles = makeStyles({
 
      imgheader:
@@ -45,6 +54,9 @@ const Header =  () => {
             <Link to="/">
             <img src={logo} className={classes.imgheader}/>
             </Link>
+            <Button  variant="contained" color="primary" size="small"  className={classes.loginbutton} onClick={handleLogout}>
+            Log Out
+         </Button>
          </div> :
           <div className={classes.headerdiv}>
           <Link to="/">
@@ -53,8 +65,6 @@ const Header =  () => {
           <Button  variant="contained" color="primary" size="small"  className={classes.loginbutton}>
                   <Link style={{color:"white"}}to="/login">Log In</Link> 
          </Button>
-         
-      
         </div>
 
          
